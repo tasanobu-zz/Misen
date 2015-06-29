@@ -54,12 +54,12 @@ extension NSFileManager {
         file += "extension UIImage {\n"
         // initializer
         file += "\n"
-        file += "\(indent)convenience init!(assetIdentifier: AssetsIdentifier) {\n"
-        file += "\(indent)\(indent)self.init(named: assetIdentifier.rawValue)\n"
+        file += "\(indent)convenience init!(assetName: AssetName) {\n"
+        file += "\(indent)\(indent)self.init(named: assetName.rawValue)\n"
         file += "\(indent)}\n"
         // enum
         file += "\n"
-        file += "\(indent)enum AssetsIdentifier: String {\n"
+        file += "\(indent)enum AssetName: String {\n"
         for str in imagesets {
             file += "\(indent)\(indent)case \(str) = \"\(str)\"\n"
         }
