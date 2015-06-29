@@ -44,7 +44,7 @@ extension NSFileManager {
         file += "//\n"
         file += "// \(path.lastPathComponent)\n"
         file += "//\n"
-        file += "// Created by Misen(https://github.com/tasanobu/Misen) on \(NSDate().formatString)\n"
+        file += "// Created by Misen(https://github.com/tasanobu/Misen).\n"
         file += "//\n"
         file += "//\n"
         // file body
