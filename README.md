@@ -22,10 +22,10 @@ chmod +x misen.swift
 
 
 #### e.g.
-Misen generates the file below from the asset catalog with 3 image sets below.
+Misen generates the file below from the asset catalog with 3 image sets below.  
 For reference, see the [**script**](Sample/generate.sh) of the sample project.
 
-<img src="images/asset-catalog.png">
+<img src="images/asset-catalog.png" width="30%" height="30%">
 
 ```swift
 import UIKit
@@ -51,7 +51,7 @@ enum ImageAsset: String {
 
 - In your code, you can instantiate images in Asset Catalog as follows.
 
-```
+```swift
 class ViewController: UIViewController {
 
     @IBOutlet weak var cameraImageView: UIImageView! {
