@@ -3,11 +3,27 @@ Misen is a script to support using Xcode Asset Catalog in Swift.
 
 # Features
 Misen scans sub-directories in the specified Asset Catalog and creates a UIImage extension file which has the following features.
-- Application-specific enum which is constructed from Asset Catalog names and UIImage object can be instantiated directly from it.
-- UIImage non-failable initializer whose argument is an enum value above.
+- *Application-specific enum* which is constructed from Asset Catalog names and UIImage object can be instantiated directly from it.
+- *UIImage non-failable initializer* whose argument is an enum value above.
+
+# Usage
+- Change file permissions first.
+
+```
+chmod +x misen.swift
+```
+- Run the script.
+```
+./misen.swift -path PATH/TO/XCASSETS -exportPath PATH/TO/GENERATED_FILE -enumName ENUM_NAME
+```
+ - ```-path``` is a path of the asset catalog.
+ - ```-exportPath``` is an output UIImage extension file path.
+ - ```-enumName``` is an enum name to be generated. This is **optional** and ```ImageAsset``` is used as default when this parameter is not specified.
+
 
 #### e.g.
 Misen generates the file below from the asset catalog with 3 image sets below.
+For reference, see the [**script**](Sample/generate.sh) of the sample project.
 
 <img src="images/asset-catalog.png">
 
@@ -59,21 +75,6 @@ class ViewController: UIViewController {
     }
     ...
 }
-```
-
-
-# Usage
-- Change file permissions first.
-
-```
-chmod +x misen.swift
-```
-- Run the script.
- - ```-path``` is a path of the asset catalog.
- - ```-exportPath``` is an output UIImage extension file path.
- - ```-enumName``` is an enum name to be generated. This is optional and ```ImageAsset``` is used as default.
-```
-./misen.swift -path PATH -exportPath OUTPUT_FILE_PATH -enumName ImageAsset
 ```
 
 # Requirements
