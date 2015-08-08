@@ -4,24 +4,18 @@ import Foundation
 
 // MARK: NSUserDefaults extension
 extension NSUserDefaults {
-    var arguments: (String, String) {
-        var assetPath  = self.stringForKey("path")
-        var outputPath = self.stringForKey("exportPath")
+    var arguments: (String, String, String) {
+        var assetPath  = stringForKey("path")
+        var outputPath = stringForKey("exportPath")
+        // enumName is optional and "ImageAsset" is used for enum as default value.
+        var enumName   = stringForKey("enumName") ?? "ImageAsset"
         if assetPath == nil {
             fatalError("An asset catalog path must be specified by \"-path\".")
         }
         if outputPath == nil {
             fatalError("An output path must be specified by \"-exportPath\".")
         }
-        return (assetPath!, outputPath!)
-    }
-}
-// MARK: NSDate extension
-extension NSDate {
-    var formatString: String {
-        var df = NSDateFormatter()
-        df.dateFormat = "yyyy-MM-dd"
-        return df.stringFromDate(self)
+        return (assetPath!, outputPath!, enumName)
     }
 }
 // MARK: NSFileManager
@@ -37,47 +31,53 @@ extension NSFileManager {
         return imagesets
     }
     
-    func writeimagesets(imagesets: [String], atPath path: String) -> Bool {
+    func build(assets: [String], _ exportPath: String, _ enumName: String) -> Bool {
         let indent = "    " // indent is 4 spaces
         var file: String = ""
-        // file header
-        file += "//\n"
-        file += "// \(path.lastPathComponent)\n"
-        file += "//\n"
-        file += "// Created by Misen(https://github.com/tasanobu/Misen).\n"
-        file += "//\n"
-        file += "//\n"
-        // file body
+        /// file header
+        file += "// Generated with Misen by tasanobu - https://github.com/tasanobu/Misen" + "\n"
         file += "\n"
-        file += "import UIKit\n"
+        file += "import UIKit" + "\n"
         file += "\n"
-        file += "extension UIImage {\n"
+        
+        /// UIImage extension
+        file += "// MARK: - UIImage extension" + "\n"
+        file += "extension UIImage {" + "\n"
         // initializer
+        file += indent + "convenience init!(assetName: \(enumName)) {" + "\n"
+        file += indent + indent + "self.init(named: assetName.rawValue)" + "\n"
+        file += indent + "}" + "\n"
+        ///end of UIImage extension
+        file += "}" + "\n"
+        
         file += "\n"
-        file += "\(indent)convenience init!(assetName: AssetName) {\n"
-        file += "\(indent)\(indent)self.init(named: assetName.rawValue)\n"
-        file += "\(indent)}\n"
-        // enum
-        file += "\n"
-        file += "\(indent)enum AssetName: String {\n"
-        for str in imagesets {
-            file += "\(indent)\(indent)case \(str) = \"\(str)\"\n"
+        
+        /// enum
+        file += "// MARK: - " + enumName + "\n"
+        file += "enum \(enumName): String {" + "\n"
+        for str in assets {
+            file += indent + "case \(str) = \"\(str)\"" + "\n"
         }
-        file += "\(indent)}\n"
-        // end of file
-        file += "}\n"
+        file += "\n"
+        file += indent + "var image: UIImage {" + "\n"
+        file += indent + indent + "return UIImage(named: self.rawValue)!" + "\n"
+        file += indent + "}" + "\n"
+        /// end of enum
+        file += "}" + "\n"
         
         let data = file.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        
-        return self.createFileAtPath(path, contents: data, attributes: nil)
+        return createFileAtPath(exportPath, contents: data, attributes: nil)
     }
 }
 
 // MARK: - Main
-let (path, exportPath) = NSUserDefaults.standardUserDefaults().arguments
-if let imagesets = NSFileManager.defaultManager().imagesets(inAssetsPath: path) where !imagesets.isEmpty {
-    let result = NSFileManager.defaultManager().writeimagesets(imagesets, atPath: exportPath)
-    println("Succeeded to create an UIImage extension file at \(exportPath).")
+let (path, exportPath, enumName) = NSUserDefaults.standardUserDefaults().arguments
+let fm = NSFileManager.defaultManager()
+
+if let imagesets = fm.imagesets(inAssetsPath: path) where !imagesets.isEmpty {
+    let result = fm.build(imagesets, exportPath, enumName)
+    let resultStr = result ? "Succeeded" : "Failed"
+    println("\(resultStr) to generate enum and UIImage extension file at \(exportPath).")
 } else {
     println("[Error] No imageset is found and failed to export a file...")
 }
