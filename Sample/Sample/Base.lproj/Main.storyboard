@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yaH-uM-HuF">
+                                <rect key="frame" x="275" y="275" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="OWT-if-HOa"/>
+                                    <constraint firstAttribute="width" constant="50" id="OcK-1P-b5d"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CIp-Re-QNR">
+                                <rect key="frame" x="175" y="275" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hxo-OM-Dv5"/>
+                                    <constraint firstAttribute="width" constant="50" id="qgR-eV-Ssb"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Qw-hV-MUd">
+                                <rect key="frame" x="375" y="275" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4tx-ti-diz"/>
+                                    <constraint firstAttribute="width" constant="50" id="p7x-ES-Lh3"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="yaH-uM-HuF" secondAttribute="centerY" id="DEm-Ss-1Md"/>
+                            <constraint firstAttribute="centerY" secondItem="CIp-Re-QNR" secondAttribute="centerY" id="LNX-NM-1Ks"/>
+                            <constraint firstItem="yaH-uM-HuF" firstAttribute="leading" secondItem="CIp-Re-QNR" secondAttribute="trailing" constant="50" id="Mif-bp-rGD"/>
+                            <constraint firstAttribute="centerX" secondItem="yaH-uM-HuF" secondAttribute="centerX" id="Osa-il-gnu"/>
+                            <constraint firstAttribute="centerY" secondItem="8Qw-hV-MUd" secondAttribute="centerY" id="klH-cE-z63"/>
+                            <constraint firstItem="8Qw-hV-MUd" firstAttribute="leading" secondItem="yaH-uM-HuF" secondAttribute="trailing" constant="50" id="sr8-yS-1Aq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraImageView" destination="CIp-Re-QNR" id="Lf2-yB-nrT"/>
+                        <outlet property="contactImageView" destination="yaH-uM-HuF" id="HlI-ED-ddZ"/>
+                        <outlet property="homeImageView" destination="8Qw-hV-MUd" id="Hnr-pc-eaJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
