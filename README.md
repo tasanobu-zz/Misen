@@ -3,25 +3,32 @@ Misen is a script to support using Xcode Asset Catalog in Swift.
 
 # Features
 Misen scans sub-directories in the specified Asset Catalog and creates a UIImage extension file which has the following features.
-- Application-specific enums which is constructed from Asset Catalog names.
+- Application-specific enum which is constructed from Asset Catalog names and UIImage object can be instantiated directly from it.
 - UIImage non-failable initializer whose argument is an enum value above.
 
 #### e.g.
-Misen creates the UIImage extension file from the asset catalog with 3 image sets below.
+Misen generates the file below from the asset catalog with 3 image sets below.
 
 <img src="images/asset-catalog.png">
 
-```
-extension UIImage {
+```swift
+import UIKit
 
-    convenience init!(assetName: AssetName) {
+// MARK: - UIImage extension
+extension UIImage {
+    convenience init!(assetName: ImageAsset) {
         self.init(named: assetName.rawValue)
     }
+}
 
-    enum AssetName: String {
-        case Camera = "Camera"
-        case Home = "Home"
-        case Mail = "Mail"
+// MARK: - ImageAsset
+enum ImageAsset: String {
+    case Camera = "Camera"
+    case Contact = "Contact"
+    case Home = "Home"
+
+    var image: UIImage {
+        return UIImage(named: self.rawValue)!
     }
 }
 ```
@@ -29,9 +36,29 @@ extension UIImage {
 - In your code, you can instantiate images in Asset Catalog as follows.
 
 ```
-let camera = UIImage(assetName: .Camera)
-let home   = UIImage(assetName: .Home)
-let mail   = UIImage(assetName: .Mail)
+class ViewController: UIViewController {
+
+    @IBOutlet weak var cameraImageView: UIImageView! {
+        didSet {
+            // Instantiate UIImage directly from ImageAsset enum
+            cameraImageView.image = ImageAsset.Camera.image
+        }
+    }
+
+    @IBOutlet weak var contactImageView: UIImageView! {
+        didSet {
+            contactImageView.image = ImageAsset.Contact.image
+        }
+    }
+
+    @IBOutlet weak var homeImageView: UIImageView! {
+        didSet {
+            // Instantiate UIImage with UIImage extension
+            homeImageView.image = UIImage(assetName: .Home)
+        }
+    }
+    ...
+}
 ```
 
 
@@ -44,14 +71,17 @@ chmod +x misen.swift
 - Run the script.
  - ```-path``` is a path of the asset catalog.
  - ```-exportPath``` is an output UIImage extension file path.
-
+ - ```-enumName``` is an enum name to be generated. This is optional and ```ImageAsset``` is used as default.
 ```
-./misen.swift -path PATH -exportPath OUTPUT_FILE_PATH
+./misen.swift -path PATH -exportPath OUTPUT_FILE_PATH -enumName ImageAsset
 ```
 
 # Requirements
-- Xcode 6.3
+- Xcode 6.4
 - Swift 1.2
+
+# Release Notes
+See [CHANES.md](CHANGES.md).
 
 # License
 Misen is released under the MIT license. See LICENSE for details.
