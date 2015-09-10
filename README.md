@@ -78,8 +78,8 @@ class ViewController: UIViewController {
 ```
 
 # Requirements
-- Xcode 6.4
-- Swift 1.2
+- Xcode 7.0
+- Swift 2.0 
 
 # Release Notes
 See [CHANES.md](CHANGES.md).
