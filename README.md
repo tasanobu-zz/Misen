@@ -79,10 +79,10 @@ class ViewController: UIViewController {
 
 # Requirements
 - Xcode 7.0
-- Swift 2.0 
+- Swift 2.0
 
 # Release Notes
-See [CHANES.md](CHANGES.md).
+See [Releases](https://github.com/tasanobu/Misen/releases).
 
 # License
 Misen is released under the MIT license. See LICENSE for details.
