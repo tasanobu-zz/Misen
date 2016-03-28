@@ -30,7 +30,7 @@ extension NSFileManager {
                 }
         }
         catch {
-            print("\n[Error] An error occurred in \(__FUNCTION__).\n\t error: \(error)\n")
+            print("\n[Error] An error occurred in \(#function).\n\t error: \(error)\n")
         }
         return nil
     }
