@@ -19,6 +19,17 @@ extension NSUserDefaults {
 // MARK: NSFileManager
 extension NSFileManager {
     func imagesets(inAssetsPath path: String) -> [String]? {
+        
+        // let remove white spaces and dash from asset name. e.g My Image.imagesets, My-Image.imagesets into My_Image
+        let normalize = { (asset: String) -> String in
+            if let regex = try? NSRegularExpression(pattern: "\\s|-", options: .CaseInsensitive){
+                let range = NSRange(location: 0,length: asset.characters.count)
+                
+                return regex.stringByReplacingMatchesInString(asset, options: .WithTransparentBounds, range: range, withTemplate: "_")
+            }
+            return asset
+        }
+        
         do {
             let subpaths = try subpathsOfDirectoryAtPath(path)
             return subpaths
@@ -26,7 +37,7 @@ extension NSFileManager {
                     $0.hasSuffix("imageset")
                 }
                 .map {
-                    ($0 as NSString).lastPathComponent.componentsSeparatedByString(".")[0]
+                    normalize(($0 as NSString).lastPathComponent.componentsSeparatedByString(".")[0])
                 }
         }
         catch {
