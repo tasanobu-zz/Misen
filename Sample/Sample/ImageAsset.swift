@@ -11,7 +11,9 @@ extension UIImage {
 
 // MARK: - ImageAsset
 enum ImageAsset: String {
+    case Camera_Icon = "Camera_Icon"
     case Camera = "Camera"
+    case Contact_Icon = "Contact_Icon"
     case Contact = "Contact"
     case Home = "Home"
 
