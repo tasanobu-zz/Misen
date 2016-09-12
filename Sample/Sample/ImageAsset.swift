@@ -11,9 +11,9 @@ extension UIImage {
 
 // MARK: - ImageAsset
 enum ImageAsset: String {
-    case Camera = "Camera"
-    case Contact = "Contact"
-    case Home = "Home"
+    case camera = "camera"
+    case contact = "contact"
+    case home = "home"
 
     var image: UIImage {
         return UIImage(named: self.rawValue)!
