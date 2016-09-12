@@ -39,9 +39,9 @@ extension UIImage {
 
 // MARK: - ImageAsset
 enum ImageAsset: String {
-    case Camera = "Camera"
-    case Contact = "Contact"
-    case Home = "Home"
+    case camera = "camera"
+    case contact = "contact"
+    case home = "home"
 
     var image: UIImage {
         return UIImage(named: self.rawValue)!
@@ -57,20 +57,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var cameraImageView: UIImageView! {
         didSet {
             // Instantiate UIImage directly from ImageAsset enum
-            cameraImageView.image = ImageAsset.Camera.image
+            cameraImageView.image = ImageAsset.camera.image
         }
     }
 
     @IBOutlet weak var contactImageView: UIImageView! {
         didSet {
-            contactImageView.image = ImageAsset.Contact.image
+            contactImageView.image = ImageAsset.contact.image
         }
     }
 
     @IBOutlet weak var homeImageView: UIImageView! {
         didSet {
             // Instantiate UIImage with UIImage extension
-            homeImageView.image = UIImage(assetName: .Home)
+            homeImageView.image = UIImage(assetName: .home)
         }
     }
     ...
@@ -78,8 +78,8 @@ class ViewController: UIViewController {
 ```
 
 # Requirements
-- Xcode 7.0
-- Swift 2.0
+- Xcode 8.0
+- Swift 3.0
 
 # Release Notes
 See [Releases](https://github.com/tasanobu/Misen/releases).
