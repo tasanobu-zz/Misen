@@ -12,19 +12,19 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var cameraImageView: UIImageView! {
         didSet {
-            cameraImageView.image = ImageAsset.Camera.image
+            cameraImageView.image = ImageAsset.camera.image
         }
     }
     
     @IBOutlet weak var contactImageView: UIImageView! {
         didSet {
-            contactImageView.image = ImageAsset.Contact.image
+            contactImageView.image = ImageAsset.contact.image
         }
     }
     
     @IBOutlet weak var homeImageView: UIImageView! {
         didSet {
-            homeImageView.image = UIImage(assetName: .Home)
+            homeImageView.image = UIImage(assetName: .home)
         }
     }
     
